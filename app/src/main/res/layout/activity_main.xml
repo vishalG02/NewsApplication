@@ -27,12 +27,19 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
             android:orientation="vertical"
             android:background="@color/background">
+
+            <ProgressBar
+                android:id="@+id/pb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv"
@@ -42,7 +49,7 @@
                 android:paddingBottom="8dp"
                 android:clipToPadding="false"/>
 
-        </LinearLayout>
+        </RelativeLayout>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

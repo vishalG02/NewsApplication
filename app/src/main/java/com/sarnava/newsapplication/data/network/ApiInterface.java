@@ -1,4 +1,4 @@
-package com.sarnava.newsapplication.network;
+package com.sarnava.newsapplication.data.network;
 
 import com.sarnava.newsapplication.data.NewsResponse;
 

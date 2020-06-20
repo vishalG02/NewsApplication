@@ -25,4 +25,16 @@
         <item name="android:textSize">12sp</item>
     </style>
 
+    <style name="newsDetailTitle" parent="AppTheme">
+        <item name="android:fontFamily">@font/roboto_slab_bold</item>
+        <item name="android:textColor">@color/title</item>
+        <item name="android:textSize">29sp</item>
+    </style>
+
+    <style name="newsDetailDesc" parent="AppTheme">
+        <item name="android:fontFamily">@font/roboto_slab_regular</item>
+        <item name="android:textColor">@color/other</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
 </resources>

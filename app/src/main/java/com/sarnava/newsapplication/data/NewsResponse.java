@@ -2,9 +2,10 @@ package com.sarnava.newsapplication.data;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class NewsResponse {
+public class NewsResponse implements Serializable {
 
     @SerializedName("status")
     private String status;

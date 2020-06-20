@@ -5,15 +5,15 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import android.content.Context;
 import android.os.Bundle;
+import android.view.View;
 
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import com.sarnava.newsapplication.R;
 import com.sarnava.newsapplication.data.News;
 import com.sarnava.newsapplication.data.NewsResponse;
 import com.sarnava.newsapplication.databinding.ActivityMainBinding;
-import com.sarnava.newsapplication.network.ApiInterface;
+import com.sarnava.newsapplication.data.network.ApiInterface;
 
 import java.util.List;
 
@@ -81,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
 
                         adapter = new NewsAdapter(news);
                         binding.rv.setAdapter(adapter);
+                        binding.pb.setVisibility(View.GONE);
                     }
                 });
     }

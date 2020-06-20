@@ -2,7 +2,9 @@ package com.sarnava.newsapplication.data;
 
 import com.google.gson.annotations.SerializedName;
 
-public class News {
+import java.io.Serializable;
+
+public class News implements Serializable {
 
     @SerializedName("title")
     private String title;
@@ -55,7 +57,7 @@ public class News {
         this.source = source;
     }
 
-    public class Source{
+    public class Source implements Serializable{
 
         @SerializedName("name")
         private String name;
