@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">NewsApplication</string>
+    <string name="headlines">HEADLINES</string>
+</resources>
