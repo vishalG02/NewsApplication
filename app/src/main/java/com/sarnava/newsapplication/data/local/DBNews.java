@@ -1,21 +1,42 @@
-package com.sarnava.newsapplication.data;
+package com.sarnava.newsapplication.data.local;
 
-import com.google.gson.annotations.SerializedName;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
 
-public class News implements Serializable {
+import io.reactivex.annotations.NonNull;
 
-    @SerializedName("title")
+@Entity
+public class DBNews implements Serializable {
+
+    @NonNull
+    @PrimaryKey(autoGenerate = true)
+    private int id;
+
+    @ColumnInfo(name = "title")
     private String title;
-    @SerializedName("description")
+
+    @ColumnInfo(name = "description")
     private String description;
-    @SerializedName("urlToImage")
+
+    @ColumnInfo(name = "url")
     private String urlToImage;
-    @SerializedName("publishedAt")
+
+    @ColumnInfo(name = "published_at")
     private String publishedAt;
-    @SerializedName("source")
-    private Source source;
+
+    @ColumnInfo(name = "source")
+    private String source;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getTitle() {
         return title;
@@ -49,25 +70,11 @@ public class News implements Serializable {
         this.publishedAt = publishedAt;
     }
 
-    public Source getSource() {
+    public String getSource() {
         return source;
     }
 
-    public void setSource(Source source) {
+    public void setSource(String source) {
         this.source = source;
-    }
-
-    public static class Source implements Serializable{
-
-        @SerializedName("name")
-        private String name;
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
     }
 }

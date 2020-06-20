@@ -26,6 +26,11 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         this.news = news;
     }
 
+    public void setNews(List<News> news) {
+        this.news = news;
+        notifyDataSetChanged();
+    }
+
     @NonNull
     @Override
     public NewsAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -50,7 +55,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
 
     @Override
     public int getItemCount() {
-        return news.size();
+        return news == null?0:news.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
