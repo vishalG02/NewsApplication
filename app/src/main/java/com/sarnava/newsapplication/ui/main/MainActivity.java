@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onError(Throwable e) {
                         Log.e("lala api", "error "+e);
-                        Toast.makeText(MainActivity.this, "Some error occured", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "Unable to refresh feed", Toast.LENGTH_SHORT).show();
                         binding.pb.setVisibility(View.GONE);
                     }
 

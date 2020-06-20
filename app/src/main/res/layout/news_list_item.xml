@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+        <variable
+            name="news"
+            type="com.sarnava.newsapplication.data.News" />
+    </data>
+
     <androidx.cardview.widget.CardView
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="vertical"
@@ -21,7 +27,8 @@
                 android:id="@+id/iv"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scaleType="fitXY"/>
+                android:scaleType="fitXY"
+                app:url="@{news.urlToImage}"/>
 
             <View
                 android:layout_width="match_parent"
@@ -39,7 +46,8 @@
                     android:id="@+id/title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:theme="@style/title"/>
+                    android:theme="@style/title"
+                    android:text="@{news.title}"/>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -51,7 +59,8 @@
                         android:id="@+id/source"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:theme="@style/other"/>
+                        android:theme="@style/other"
+                        android:text="@{news.source.name}"/>
 
                     <TextView
                         android:id="@+id/date"
@@ -59,7 +68,8 @@
                         android:layout_height="wrap_content"
                         android:theme="@style/other"
                         android:layout_marginLeft="12dp"
-                        android:alpha=".75"/>
+                        android:alpha=".75"
+                        android:text="@{news.publishedAt}"/>
 
                 </LinearLayout>
 
