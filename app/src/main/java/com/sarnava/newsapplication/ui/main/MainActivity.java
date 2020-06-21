@@ -7,13 +7,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.room.Room;
 
 import android.annotation.SuppressLint;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+import com.sarnava.newsapplication.BuildConfig;
 import com.sarnava.newsapplication.R;
 import com.sarnava.newsapplication.data.News;
 import com.sarnava.newsapplication.data.NewsResponse;
@@ -53,14 +53,14 @@ public class MainActivity extends AppCompatActivity {
         adapter = new NewsAdapter(news);
         binding.rv.setAdapter(adapter);
 
-        newsDatabase = Room.databaseBuilder(this, NewsDatabase.class, "news_db").build();
+        newsDatabase = Room.databaseBuilder(getApplicationContext(), NewsDatabase.class, "news_db").build();
 
         fetchNewsFromDB();
     }
 
     public Retrofit getRetrofit() {
 
-        final String BASE_URL = "http://newsapi.org/";
+        final String BASE_URL = BuildConfig.ROOT_URL;
         Retrofit retrofit;
         retrofit = new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
 
         ApiInterface apiInterface = getRetrofit().create(ApiInterface.class);
 
-        apiInterface.getNews("us","82ee1abf946f4585ae9d78f89b3b3363")
+        apiInterface.getNews("in",BuildConfig.API_KEY)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<NewsResponse>() {
@@ -101,10 +101,16 @@ public class MainActivity extends AppCompatActivity {
                     public void onComplete() {
 
                         Log.e("lala api", "complete");
-                        adapter.setNews(news);
                         binding.pb.setVisibility(View.GONE);
+                        if(news.size()>0){
 
-                        insertOrUpdateInDb(news);
+                            adapter.setNews(news);
+                            deleteDataFromDb(news);
+                        }
+                        else {
+
+                            Toast.makeText(MainActivity.this, "Unable to refresh feed", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 });
     }
@@ -144,8 +150,31 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @SuppressLint("CheckResult")
-    private void insertOrUpdateInDb(List<News> news){
+    private void deleteDataFromDb(final List<News> news){
 
+        if(shouldUpdate){
+
+            newsDatabase.newsDao().deleteAll()
+                    .subscribeOn(Schedulers.io())
+                    .subscribe(new Action() {
+                        @Override
+                        public void run() throws Exception {
+                            Log.e("lala ", "delete from db");
+                            insertNewsInDb(news);
+                        }
+                    });
+        }
+        else {
+
+            insertNewsInDb(news);
+        }
+
+    }
+
+    @SuppressLint("CheckResult")
+    private void insertNewsInDb(List<News> news){
+
+        final List<DBNews> dbNewsList = new ArrayList<>();
         for(int i=0;i<news.size();i++){
 
             DBNews dbNews = new DBNews();
@@ -155,30 +184,16 @@ public class MainActivity extends AppCompatActivity {
             dbNews.setPublishedAt(news.get(i).getPublishedAt());
             dbNews.setSource(news.get(i).getSource().getName());
 
-            if(shouldUpdate){
-
-                newsDatabase.newsDao().updateNews(dbNews)
-                        .subscribeOn(Schedulers.io())
-                        .subscribe(new Action() {
-                            @Override
-                            public void run() throws Exception {
-
-                            }
-                        });
-                Log.e("lala "+ shouldUpdate, "update in db "+i);
-            }
-            else {
-
-                newsDatabase.newsDao().insertNews(dbNews)
-                        .subscribeOn(Schedulers.io())
-                        .subscribe(new Action() {
-                            @Override
-                            public void run() throws Exception {
-
-                            }
-                        });
-                Log.e("lala ", "insert in db "+i);
-            }
+            dbNewsList.add(dbNews);
         }
+
+        newsDatabase.newsDao().insertNews(dbNewsList)
+                .subscribeOn(Schedulers.io())
+                .subscribe(new Action() {
+                    @Override
+                    public void run() throws Exception {
+                        Log.e("lala ", "insert in db "+dbNewsList.size());
+                    }
+                });
     }
 }

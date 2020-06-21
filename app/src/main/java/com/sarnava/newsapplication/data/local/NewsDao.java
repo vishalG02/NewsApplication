@@ -20,9 +20,9 @@ public interface NewsDao {
     @Query("SELECT * FROM DBNews")
     Maybe<List<DBNews>> getAllNews();
 
-    @Insert//(onConflict = OnConflictStrategy.REPLACE)
-    Completable insertNews(DBNews news);
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    Completable insertNews(List<DBNews> news);
 
-    @Update
-    Completable updateNews(DBNews news);
+    @Query("DELETE FROM DBNews")
+    Completable deleteAll();
 }

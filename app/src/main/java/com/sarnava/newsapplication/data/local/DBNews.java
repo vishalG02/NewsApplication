@@ -4,14 +4,9 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import java.io.Serializable;
-
-import io.reactivex.annotations.NonNull;
-
 @Entity
-public class DBNews implements Serializable {
+public class DBNews {
 
-    @NonNull
     @PrimaryKey(autoGenerate = true)
     private int id;
 
