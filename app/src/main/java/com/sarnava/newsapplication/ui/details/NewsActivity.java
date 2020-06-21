@@ -11,11 +11,8 @@ import android.view.WindowManager;
 import com.sarnava.newsapplication.R;
 import com.sarnava.newsapplication.data.News;
 import com.sarnava.newsapplication.databinding.ActivityNewsBinding;
-import com.squareup.picasso.Picasso;
 
 public class NewsActivity extends AppCompatActivity {
-
-    ActivityNewsBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +21,7 @@ public class NewsActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_news);
+        ActivityNewsBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_news);
 
         if(getIntent() != null){
 

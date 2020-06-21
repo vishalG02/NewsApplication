@@ -1,6 +1,7 @@
 package com.sarnava.newsapplication.data;
 
 import com.google.gson.annotations.SerializedName;
+import com.sarnava.newsapplication.Util;
 
 import java.io.Serializable;
 
@@ -69,5 +70,10 @@ public class News implements Serializable {
         public void setName(String name) {
             this.name = name;
         }
+    }
+
+    public String getFormattedDate(){
+
+        return Util.getDate(publishedAt);
     }
 }

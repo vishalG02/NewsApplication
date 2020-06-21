@@ -11,12 +11,12 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="225dp"
         android:layout_marginTop="8dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="16dp"
-        app:cardElevation="5dp"
+        app:cardElevation="10dp"
         app:cardCornerRadius="5dp">
 
         <RelativeLayout
@@ -69,7 +69,7 @@
                         android:theme="@style/other"
                         android:layout_marginLeft="12dp"
                         android:alpha=".75"
-                        android:text="@{news.publishedAt}"/>
+                        android:text="@{news.formattedDate}"/>
 
                 </LinearLayout>
 
