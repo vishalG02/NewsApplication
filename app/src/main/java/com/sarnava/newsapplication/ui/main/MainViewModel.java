@@ -14,18 +14,22 @@ import com.sarnava.newsapplication.data.local.DBNews;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 public class MainViewModel extends AndroidViewModel {
 
     private MutableLiveData<List<News>> news = new MutableLiveData<>();
     private MutableLiveData<List<DBNews>> dbNews = new MutableLiveData<>();
     private boolean shouldUpdate;
-    private Repository repository;
 
+    //@Inject
+    Repository repository;
+
+    @Inject
     public MainViewModel(@NonNull Application application) {
         super(application);
 
         repository = Repository.getInstance();
-        repository.setRoomDB(application.getApplicationContext());
     }
 
     public LiveData<List<News>> getNews() {

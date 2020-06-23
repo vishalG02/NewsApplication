@@ -22,9 +22,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
 
     private List<News> news;
 
-    public NewsAdapter(List<News> news) {
-        this.news = news;
-    }
+    public NewsAdapter() {}
 
     public void setNews(List<News> news) {
         this.news = news;

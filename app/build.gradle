@@ -20,6 +20,7 @@ android {
             minifyEnabled false
             buildConfigField("String", "ROOT_URL", "\"http://newsapi.org/\"")
             buildConfigField("String", "API_KEY", "\"82ee1abf946f4585ae9d78f89b3b3363\"")
+            buildConfigField("String", "DB_NAME", "\"news_db\"")
         }
         release {
             minifyEnabled false
@@ -73,4 +74,7 @@ dependencies {
     implementation "androidx.room:room-rxjava2:$room_version"
 
     implementation 'android.arch.lifecycle:extensions:1.1.1'
+
+    implementation 'com.google.dagger:dagger:2.27'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.27'
 }
