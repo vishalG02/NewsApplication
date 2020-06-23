@@ -1,6 +1,5 @@
 package com.sarnava.newsapplication.ui.main;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -9,20 +8,17 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
-import com.sarnava.newsapplication.NewsApplication;
 import com.sarnava.newsapplication.R;
 import com.sarnava.newsapplication.data.News;
 import com.sarnava.newsapplication.databinding.ActivityMainBinding;
-import com.sarnava.newsapplication.di.component.ActivityComponent;
-import com.sarnava.newsapplication.di.component.DaggerActivityComponent;
-import com.sarnava.newsapplication.di.module.ActivityModule;
+import com.sarnava.newsapplication.ui.base.BaseActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     private ActivityMainBinding binding;
 
@@ -35,15 +31,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        ActivityComponent activityComponent = DaggerActivityComponent.builder()
-                .activityModule(new ActivityModule(this))
-                .appComponent(NewsApplication.getComponent())
-                .build();
-
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
-        activityComponent.inject(this);
+        getActivityComponent().inject(this);
 
         setupAdapter();
         fetchFromDB();
