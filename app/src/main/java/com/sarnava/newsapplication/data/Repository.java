@@ -23,8 +23,6 @@ import retrofit2.Retrofit;
 
 public class Repository {
 
-    private static Repository instance;
-
     @Inject
     NewsDatabase newsDatabase;
 
@@ -35,15 +33,6 @@ public class Repository {
     public Repository(){
 
        NewsApplication.getComponent().inject(this);
-    }
-
-    public static Repository getInstance(){
-
-        if(instance == null){
-
-            instance = new Repository();
-        }
-        return instance;
     }
 
     @SuppressLint("CheckResult")

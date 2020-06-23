@@ -7,9 +7,12 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.sarnava.newsapplication.NewsApplication;
 import com.sarnava.newsapplication.data.News;
 import com.sarnava.newsapplication.data.Repository;
 import com.sarnava.newsapplication.data.local.DBNews;
+import com.sarnava.newsapplication.di.component.DaggerViewModelComponent;
+import com.sarnava.newsapplication.di.component.ViewModelComponent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,14 +25,18 @@ public class MainViewModel extends AndroidViewModel {
     private MutableLiveData<List<DBNews>> dbNews = new MutableLiveData<>();
     private boolean shouldUpdate;
 
-    //@Inject
+    @Inject
     Repository repository;
 
     @Inject
     public MainViewModel(@NonNull Application application) {
         super(application);
 
-        repository = Repository.getInstance();
+        ViewModelComponent viewModelComponent = DaggerViewModelComponent.builder()
+                .appComponent(NewsApplication.getComponent())
+                .build();
+
+        viewModelComponent.inject(this);
     }
 
     public LiveData<List<News>> getNews() {

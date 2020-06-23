@@ -1,7 +1,6 @@
 package com.sarnava.newsapplication.di.module;
 
 import android.app.Application;
-import android.content.Context;
 
 import androidx.room.Room;
 
@@ -9,7 +8,6 @@ import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import com.sarnava.newsapplication.BuildConfig;
 import com.sarnava.newsapplication.NewsApplication;
 import com.sarnava.newsapplication.data.local.NewsDatabase;
-import com.sarnava.newsapplication.di.ApplicationContext;
 
 import javax.inject.Singleton;
 
@@ -25,12 +23,6 @@ public class AppModule {
 
     public AppModule(NewsApplication application){
         this.application = application;
-    }
-
-    @Provides
-    @ApplicationContext
-    Context providesContext(){
-        return application;
     }
 
     @Provides
