@@ -25,7 +25,9 @@ import javax.inject.Inject;
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
-    private NewsAdapter adapter;
+
+    @Inject
+    NewsAdapter adapter;
 
     @Inject
     MainViewModel viewModel;
@@ -52,7 +54,6 @@ public class MainActivity extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         binding.rv.setLayoutManager(linearLayoutManager);
         binding.rv.setItemAnimator(new DefaultItemAnimator());
-        adapter = new NewsAdapter();
         binding.rv.setAdapter(adapter);
     }
 

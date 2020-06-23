@@ -18,10 +18,13 @@ import com.sarnava.newsapplication.ui.details.NewsActivity;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
 
     private List<News> news;
 
+    @Inject
     public NewsAdapter() {}
 
     public void setNews(List<News> news) {
