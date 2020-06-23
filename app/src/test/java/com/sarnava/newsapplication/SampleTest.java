@@ -25,6 +25,8 @@ import org.mockito.junit.MockitoRule;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import static org.mockito.Mockito.*;
 import static org.junit.Assert.*;
 
@@ -33,29 +35,26 @@ public class SampleTest {
     @Rule
     public MockitoRule rule = MockitoJUnit.rule();
 
-    @ClassRule
-    public static final RxImmediateSchedulerRule schedulers = new RxImmediateSchedulerRule();
+    //@ClassRule
+    //public static final RxImmediateSchedulerRule schedulers = new RxImmediateSchedulerRule();
 
     @Mock
     private ApiInterface apiInterface;
 
-    //@Mock
+    @Mock
     Application application;
 
     @Mock
     private Observer<List<DBNews>> observer;
 
     MainViewModel viewModel;
-    private NewsDatabase newsDatabase;
 
     @Before
     public void setup(){
 
-        MockitoAnnotations.initMocks(this);
-        //Context context = mock(Context.class);
-        application = mock(Application.class);
+        //MockitoAnnotations.initMocks(this);
+        //application = mock(Application.class);
         viewModel = new MainViewModel(application);
-        //newsDatabase = Room.databaseBuilder(context, NewsDatabase.class, "news_db").build();
         viewModel.getDbNews().observeForever(observer);
     }
 
