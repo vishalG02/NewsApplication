@@ -1,5 +1,4 @@
 This is a simple Android application that follows the latest technologies like -
-- Kotlin
 - MVVM Design Pattern
 - Room 
 - RxJava
